@@ -21,29 +21,29 @@
   },
   {
     "ContainingType": "OrderManagement.Controllers.orderDetailsController",
-    "Method": "PostorderDetail",
+    "Method": "CreateProductReports",
     "RelativePath": "api/orderDetails",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "orderDetail",
-        "Type": "OrderManagement.Models.orderDetail",
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "request",
+        "Type": "OrderManagement.Controllers.orderDetailsController\u002BTokenRequest",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "OrderManagement.Models.orderDetail",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "OrderManagement.Controllers.orderDetailsController",

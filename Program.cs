@@ -4,7 +4,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using OrderManagement.DataConection;
 using Microsoft.OpenApi.Models;
-using OrderManagement.DataConection;
+using OrderManagement.Service;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +42,7 @@ builder.Services.AddSwaggerGen(opt =>
 // Cấu hình DbContext
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("QLOrder"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QLDuLich"));
 });
 
 
@@ -87,6 +88,8 @@ builder.Services.AddSession(options =>
 });
 
 
+builder.Services.AddHttpClient<TourServiceClient>();
+builder.Services.AddScoped<OrderDetailService>();
 
 var app = builder.Build();
 

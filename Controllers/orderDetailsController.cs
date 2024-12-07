@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderManagement.DataConection;
 using OrderManagement.Models;
+using OrderManagement.Service;
+using static OrderManagement.Controllers.orderDetailsController;
 
 namespace OrderManagement.Controllers
 {
@@ -17,10 +20,12 @@ namespace OrderManagement.Controllers
     public class orderDetailsController : ControllerBase
     {
         private readonly DataBaseContext _context;
+        private readonly OrderDetailService _orderDetailService;
 
-        public orderDetailsController(DataBaseContext context)
+        public orderDetailsController(DataBaseContext context, OrderDetailService orderDetailService)
         {
             _context = context;
+            _orderDetailService = orderDetailService;
         }
 
         // GET: api/orderDetails
@@ -75,15 +80,31 @@ namespace OrderManagement.Controllers
             return NoContent();
         }
 
-        // POST: api/orderDetails
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<orderDetail>> PostorderDetail(orderDetail orderDetail)
-        {
-            _context.OrderDetail.Add(orderDetail);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetorderDetail", new { id = orderDetail.id }, orderDetail);
+        // POST: api/product_reports/{orderReportId}
+        [HttpPost]
+        public async Task<IActionResult> CreateProductReports(int productId, int quantity, [FromBody] TokenRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Token))
+            {
+                return BadRequest("Token is required.");
+            }
+
+            try
+            {
+                // Gọi phương thức để tạo báo cáo tour mà không cần truyền orderReportId
+                var reports = await _orderDetailService.AddOrderDetailAsync(productId, quantity, request.Token);
+                return Ok(reports);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error generating reports: {ex.Message}, StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        public class TokenRequest
+        {
+            public string Token { get; set; }
         }
 
         // DELETE: api/orderDetails/5

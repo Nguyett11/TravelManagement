@@ -258,3 +258,4 @@ F:\Hocky1-Nam4\QuanLyDuLich\OrderManagement\OrderManagement\bin\Debug\net8.0\run
 F:\Hocky1-Nam4\QuanLyDuLich\OrderManagement\OrderManagement\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 F:\Hocky1-Nam4\QuanLyDuLich\OrderManagement\OrderManagement\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 F:\Hocky1-Nam4\QuanLyDuLich\OrderManagement\OrderManagement\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Hocky1-Nam4\QuanLyDuLich\OrderManagement\OrderManagement\obj\Debug\net8.0\OrderManagement.sourcelink.json
