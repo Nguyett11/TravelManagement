@@ -40,7 +40,7 @@ builder.Services.AddSwaggerGen(opt =>
 // Cấu hình DbContext
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("QLDuLich"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QLTour"));
 });
 
 
