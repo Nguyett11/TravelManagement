@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.DataConnection;
-using Backend.Models;
-using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
@@ -116,16 +114,16 @@ namespace Backend.Controllers
 
             //create token
             var claims = new[]{
-                    new Claim(JwtRegisteredClaimNames.Sub, _config["jwt:subject"]),
+                    new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                     new Claim("id",user.IdUser.ToString())
 
              };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-                _config["jwt:issuer"],
-                _config["jwt:audience"],
+                _config["Jwt:Issuer"],
+                _config["Jwt:Audience"],
                 claims,
                 expires: DateTime.UtcNow.AddMinutes(60),
                 signingCredentials: signIn
