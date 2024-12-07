@@ -11,7 +11,7 @@ namespace Backend.DataConnection
     }
 
     public DbSet<User> User { get; set; }
-    public DbSet<Tour> Tour { get; set; }
+   
     }
 
 }
